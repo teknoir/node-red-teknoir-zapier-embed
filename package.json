@@ -1,9 +1,8 @@
 {
     "name": "node-red-teknoir-zapier-embed",
-    "version": "0.0.3",
-    "description": "Devstudio nodes to embed a Zap",
+    "version": "0.0.1",
+    "description": "A Node-RED node that has an embedded Zapier editor",
     "author": "Cristian Manaila",
-    "license": "MIT",
     "homepage": "https://github.com/teknoir/node-red-teknoir-zapier-embed",
     "repository": {
         "type": "git",
@@ -12,7 +11,9 @@
     "keywords": [
         "node-red",
         "teknoir",
-        "zapier"
+        "zapier",
+        "embed",
+        "editor"
     ],
     "node-red": {
         "nodes": {
