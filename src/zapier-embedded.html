@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('zapier-embed', {
+        category: 'function',
+        color: '#E2AA00',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "tn_dark.svg",
+        label: function() {
+            return this.name||"zapier-embed";
+        },
+        oneditprepare: function() {
+            // Any additional JavaScript to run when the edit dialog is opened
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="zapier-embed">
+    <div class="form-row">
+        <label for="node-input-name">Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <!-- Embed your Zapier iframe or script here -->
+        <iframe src="www.google.com" width="100%" height="500"></iframe>
+    </div>
+</script>
