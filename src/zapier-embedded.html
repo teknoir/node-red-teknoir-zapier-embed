@@ -37,6 +37,30 @@
             element.zapCreateFromScratchDisplay = "hide";
             const container = document.querySelector("#zapier-container");
             container.appendChild(element);
+
+            $("#template-selector").typedInput({
+                typeField: $("#node-input-selectedTemplate"),
+                types: ['str', 'num'],  // define the types of input you want to allow
+                default: 'str'
+            });
+
+            // Listen for changes to the input
+            $("#template-selector").on("change", function(event) {
+                var selectedValue = $(this).val();
+                // Update the options based on the selected value
+                var optionsContainer = $("#options-container");
+                optionsContainer.empty();
+                if (selectedValue === "Option1") {
+                    optionsContainer.append("<div>Settings for Option 1</div>");
+                } else if (selectedValue === "Option2") {
+                    optionsContainer.append("<div>Settings for Option 2</div>");
+                }
+                // ... add more options as needed
+            });
+
+
         }
+        
     });
+    
 </script>

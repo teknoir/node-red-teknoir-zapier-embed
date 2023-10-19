@@ -1,0 +1,58 @@
+<script type="text/html" data-template-name="zapier-template">
+    <div id="zapier-container">
+        <label for="template-selector">Select a Template:</label>
+        <select id="template-selector" style="width:70%;">
+            <option value="template1">Template 1</option>
+            <option value="template2">Template 2</option>
+        </select>
+        <div id="options-container" style="margin-top:10px;"></div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('zapier-template', {
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: { value: "" },
+            selectedTemplate: { value: "" },
+            nodeInfo: { value: "" },
+            port: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        label: function () {
+            return this.name || "zapier-template";
+        },
+        oneditprepare: function () {
+            // Update the options based on the initial selected value
+            updateOptions($("#template-selector").val());
+
+            // Listen for changes to the input
+            $("#template-selector").on("change", function (event) {
+                var selectedValue = $(this).val();
+                updateOptions(selectedValue);
+                $("#node-input-selectedTemplate").val(selectedValue);
+            });
+
+            function updateOptions(selectedValue) {
+                // Update the options based on the selected value
+                var optionsContainer = $("#options-container");
+                optionsContainer.empty();
+                if (selectedValue === "template1") {
+                    optionsContainer.append('<label for="node-info">Node Info:</label><input type="text" id="node-info" data-input-type="nodeInfo" style="width:70%;" />');
+                } else if (selectedValue === "template2") {
+                    optionsContainer.append('<label for="port">Port:</label><input type="text" id="port" data-input-type="port" style="width:70%;" />');
+                }
+            }
+
+            // Update defaults when inputs change
+            $("#options-container").on("input", "input", function (event) {
+                var inputType = $(this).data("input-type");
+                var value = $(this).val();
+                $("#node-input-" + inputType).val(value);
+            });
+        }
+    });
+</script>

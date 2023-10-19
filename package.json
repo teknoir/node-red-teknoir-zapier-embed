@@ -17,7 +17,8 @@
     ],
     "node-red": {
         "nodes": {
-            "zap_embed": "src/zapier-embedded.js"
+            "zap_embed": "src/zapier-embedded.js",
+            "zap_templates": "src/zapier-templates.js"
         }
     },
     "dependencies": {
