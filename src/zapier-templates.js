@@ -6,6 +6,10 @@ module.exports = function(RED) {
       node.on('input', function(msg) {
           msg.payload = { selectedTemplate: node.selectedTemplate };
           node.send(msg);
+
+          var triggerNodeUrl = msg.payload;
+
+          this.triggerNodeUrl = triggerNodeUrl;
       });
   }
   RED.nodes.registerType("zapier-template", ZapierTemplateNode);
