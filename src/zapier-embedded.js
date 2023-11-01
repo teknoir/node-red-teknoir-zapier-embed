@@ -1,5 +1,5 @@
 module.exports = function(RED) {
-    function ZapierEmbedNode(config) {
+    function ZapierEditorNode(config) {
       RED.nodes.createNode(this, config);
       var node = this;
       node.selectedTemplate = config.selectedTemplate;
@@ -9,6 +9,6 @@ module.exports = function(RED) {
         node.send(msg);
       });
     }
-    RED.nodes.registerType("zapier-embed", ZapierEmbedNode);
+    RED.nodes.registerType("zapier-editor", ZapierEditorNode);
   };
   

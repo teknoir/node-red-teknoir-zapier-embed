@@ -1,9 +1,9 @@
-<script type="text/html" data-template-name="zapier-embed">
+<script type="text/html" data-template-name="zapier-editor">
     <div id="zapier-container"></div>
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('zapier-embed', {
+    RED.nodes.registerType('zapier-editor', {
         category: 'function',
         color: '#a6bbcf',
         defaults: {
@@ -11,9 +11,9 @@
         },
         inputs: 1,
         outputs: 1,
-        icon: "file.png",
+        icon: "tn_dark.svg",
         label: function() {
-            return this.name || "zapier-embed";
+            return this.name || "zapier-editor";
         },
         oneditprepare: function() {
             // Load JS
@@ -21,33 +21,34 @@
             script.type = "module";
             script.src = "https://cdn.zapier.com/packages/partner-sdk/v0/zapier-elements/zapier-elements.esm.js";
             document.head.appendChild(script);
-
+                    
             // Load CSS
             const stylesheet = document.createElement("link");
             stylesheet.rel = "stylesheet";
             stylesheet.href = "https://cdn.zapier.com/packages/partner-sdk/v0/zapier-elements/zapier-elements.css";
             document.head.appendChild(stylesheet);
-
+                    
             // Create and display zapier-full-experience
             const element = document.createElement("zapier-full-experience");
-            element.clientId = "L7pEoNyAfU52IpWaSSksfAdDi71MYIlP16zGl8Zt";  
-            element.theme = "light";
+            element.clientId = "L7pEoNyAfU52IpWaSSksfAdDi71MYIlP16zGl8Zt";
+            element.theme = "dark";
+            element.introCopyDisplay = "hide";
             element.appSelectionDisplay = "hide";
             element.zapLimit = "0";
             element.zapCreateFromScratchDisplay = "hide";
-            const container = document.querySelector("#zapier-container");
+            const container = document.querySelector("#zapier-container") || document.body;
             container.appendChild(element);
 
             $("#template-selector").typedInput({
                 typeField: $("#node-input-selectedTemplate"),
-                types: ['str', 'num'],  // define the types of input you want to allow
+                types: ['str', 'num'],  
                 default: 'str'
             });
 
             // Listen for changes to the input
             $("#template-selector").on("change", function(event) {
                 var selectedValue = $(this).val();
-                // Update the options based on the selected value
+                
                 var optionsContainer = $("#options-container");
                 optionsContainer.empty();
                 if (selectedValue === "Option1") {
@@ -55,10 +56,7 @@
                 } else if (selectedValue === "Option2") {
                     optionsContainer.append("<div>Settings for Option 2</div>");
                 }
-                // ... add more options as needed
             });
-
-
         }
         
     });
