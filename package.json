@@ -17,7 +17,7 @@
     ],
     "node-red": {
         "nodes": {
-            "zap_embed": "src/zapier-editor.js",
+            "zap_editor": "src/zapier-editor.js",
             "zap_templates": "src/zapier-templates.js"
         }
     },
