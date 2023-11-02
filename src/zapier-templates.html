@@ -48,12 +48,24 @@
                 optionsContainer.empty();
                 iframeContainer.empty(); // Clear existing iframe
 
+                function setupTriggerUrlListener(triggerUrlInputId, iframeId, baseUrl) {
+                    $("#" + triggerUrlInputId).on("input", function() {
+                        var triggerNodeUrl = $(this).val();
+                        var newIframeSrc = baseUrl.replace('TRIGGER_NODEURL', encodeURIComponent(triggerNodeUrl));
+                        $("#" + iframeId).attr('src', newIframeSrc); // Update iframe src
+                    });
+                }
+
                 // Give the user the option to select what template to use
                 switch (selectedValue) {
                     case "template1":
-                        optionsContainer.append('<label for="node-info">Trigger URL</label><input type="text" id="node-info" data-input-type="triggerNodeUrl" style="width:70%;" />');
-                        iframeContainer.append('<iframe src="https://api.zapier.com/v1/embed/teknoir/create?steps[0][app]=TeknoirCLIAPI@latest&steps[0][action]=new_event&steps[0][params][nodeurl]=TRIGGER_NODEURL&steps[1][app]=MSTeamsCLIAPI@latest&steps[1][action]=send_chat_message" style="width:100%; height:70vh;"></iframe>');
+                        optionsContainer.append('<label for="node-info">Trigger URL:</label><input type="text" id="node-trigger-url" data-input-type="triggerNodeUrl" style="width:70%;" />');
+                        var iframeHtml = '<iframe id="zapier-iframe" src="https://api.zapier.com/v1/embed/teknoir/create?steps[0][app]=TeknoirCLIAPI@latest&steps[0][action]=new_event&steps[0][params][nodeurl]=TRIGGER_NODEURL&steps[1][app]=MSTeamsCLIAPI@latest&steps[1][action]=send_chat_message" style="width:100%; height:70vh;"></iframe>';
+                        iframeContainer.append(iframeHtml);
+        
+                        setupTriggerUrlListener("node-trigger-url", "zapier-iframe", 'https://api.zapier.com/v1/embed/teknoir/create?steps[0][app]=TeknoirCLIAPI@latest&steps[0][action]=new_event&steps[0][params][nodeurl]=TRIGGER_NODEURL&steps[1][app]=MSTeamsCLIAPI@latest&steps[1][action]=send_chat_message');
                         break;
+
                     case "template2":
                         iframeContainer.empty();
                         // optionsContainer.append('<label for="port">Port:</label><input type="text" id="port" data-input-type="port" style="width:70%;" />');
